@@ -1,0 +1,11 @@
+server:
+  port: 8080
+
+spring:
+  cloud:
+    config:
+      uri: http://localhost:8888
+      name: base-web
+      headers:
+        application-name: base-web
+        application-password: "o8@p4y3t@$4$#u"
