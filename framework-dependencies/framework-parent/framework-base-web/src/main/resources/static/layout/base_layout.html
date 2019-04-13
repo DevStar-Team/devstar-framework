@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<title layout:title-pattern="$CONTENT_TITLE | $LAYOUT_TITLE">Megazone Cloud</title>
+<script type="text/javascript" th:inline="javascript">
+	// <![CDATA[
+	const CONTEXT_PATH = /*[[ ${#servletContext.contextPath} ]]*/;
+	// ]]>
+</script>
+</head>
+<body layout:fragment="viewport">
+</body>
+</html>

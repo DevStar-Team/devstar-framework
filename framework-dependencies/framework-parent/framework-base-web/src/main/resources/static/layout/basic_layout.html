@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	layout:decorate="~{layout/base_layout}">
+<head>
+<!-- [[ START ]] CSS import -->
+<th:block layout:replace="~{layout/common_fragments :: css-import}"></th:block>
+<!-- [[  END  ]] CSS import -->
+</head>
+<body layout:fragment="viewport">
+	<!-- [[ START ]] GNB 영역 -->
+	<header layout:replace="~{layout/common_fragments :: gnb}"></header>
+	<!-- [[  END  ]] GNB 영역 -->
+
+	<!-- [[ START ]] LNB 영역 -->
+	<aside layout:replace="~{layout/common_fragments :: lnb}"></aside>
+	<!-- [[  END  ]] LNB 영역 -->
+
+	<!-- [[ START ]] Content 영역 -->
+	<div layout:fragment="content" th:classappend="page-body"></div>
+	<!-- [[  END  ]] Content 영역 -->
+
+	<!-- [[ START ]] Footer 영역 -->
+	<footer layout:replace="~{layout/common_fragments :: footer}"></footer>
+	<!-- [[  END  ]] Footer 영역 -->
+
+	<!-- [[ START ]] Custom 영역 -->
+	<div id="custom-area" layout:fragment="custom" th:classappend="page-custom"></div>
+	<!-- [[  END  ]] Custom 영역 -->
+	
+	<!-- [[ START ]] Javascript import -->
+	<th:block layout:replace="~{layout/common_fragments :: script-import}"></th:block>
+	<script layout:fragment="local-script"></script>
+	<!-- [[  END  ]] Javascript import -->
+</body>
+</html>
