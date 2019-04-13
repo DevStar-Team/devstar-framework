@@ -129,4 +129,26 @@
 		</dependency>
 		<!-- [[ END ]] Web Library -->
 	</dependencies>
+	
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<mainClass>me.devstar.web.ApplicationInitializer</mainClass>
+				</configuration>
+			</plugin>
+		</plugins>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+			</resource>
+			<resource>
+				<directory>src/main/webapp</directory>
+				<targetPath>./META-INF/resources</targetPath>
+			</resource>
+		</resources>
+	</build>
+	
 </project>
