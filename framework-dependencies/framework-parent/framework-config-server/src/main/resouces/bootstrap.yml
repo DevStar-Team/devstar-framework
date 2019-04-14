@@ -15,7 +15,7 @@ spring.cloud.config.server:
     force-pull: true
     delete-untracked-branches: true
     search-paths:      - base-web
-      - "{application-name}"
+      - "{application}"
 
 devstar:
   client:
