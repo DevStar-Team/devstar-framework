@@ -26,9 +26,14 @@
 	<modules>
 		<module>framework-dependencies</module>
 	</modules>
+	
 
 	<repositories>
-		<repository>
+	    <repository>
+	      <id>maven-group</id>
+	      <url>http://nexus.devstar.me/repository/maven-public/</url>
+	    </repository>
+<!-- 		<repository>
 			<id>spring-release</id>
 			<name>Spring Releases</name>
 			<url>http://repo.spring.io/libs-release</url>
@@ -55,8 +60,19 @@
 		<repository>
 			<id>mvnrepository</id>
 			<url>http://www.mvnrepository.com</url>
-		</repository>
+		</repository> -->
 	</repositories>
+
+  <distributionManagement>
+    <snapshotRepository>
+      <id>nexus-snapshots</id>
+      <url>http://nexus.devstar.me/repository/maven-snapshots/</url>
+    </snapshotRepository>
+    <repository>
+      <id>nexus-releases</id>
+      <url>http://nexus.devstar.me/repository/maven-releases/</url>
+    </repository>
+  </distributionManagement>
 
 	<build>
 		<plugins>

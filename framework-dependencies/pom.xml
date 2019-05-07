@@ -23,7 +23,8 @@
 
 		<!-- [[ START ]] Spring Boot Dependencies Version -->
 		<spring.boot.version>2.1.0.RELEASE</spring.boot.version>
-		<spring-cloud.version>Greenwich.M3</spring-cloud.version>
+		<!--<spring-cloud.version>Greenwich.M3</spring-cloud.version> -->
+		<spring-cloud.version>Greenwich.RELEASE</spring-cloud.version>
 		<!-- [[ END ]] Spring Boot Dependencies Version -->
 
 		<!-- [[ START ]] Custom Dependencies Version -->
@@ -62,7 +63,7 @@
 
 	<dependencyManagement>
 		<dependencies>
-			<dependency>
+ 			<dependency>
 				<groupId>org.springframework.cloud</groupId>
 				<artifactId>spring-cloud-dependencies</artifactId>
 				<version>${spring-cloud.version}</version>
