@@ -4,8 +4,7 @@ server:
 spring:
   cloud:
     config:
-      #uri: http://13.124.204.199:8888
-      uri: http://localhost:8888
+      uri: http://config.devstar.me:8888
       name: base-web
       headers:
         application-name: base-web
