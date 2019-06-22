@@ -14,19 +14,19 @@ import javax.persistence.MappedSuperclass;
  */
 @MappedSuperclass
 public class BaseModel extends AbstractBaseModel<Long> {
-
+	
 	private static final long serialVersionUID = -4741626933110625809L;
-
+	
 	@Id
 	@GeneratedValue
 	@Column(name = "UID")
 	private Long id;
-
+	
 	@Override
 	public Long getId() {
 		return id;
 	}
-
+	
 	/**
 	 * @param id the id to set
 	 */

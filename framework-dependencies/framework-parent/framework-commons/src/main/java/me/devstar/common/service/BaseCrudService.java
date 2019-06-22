@@ -1,5 +1,7 @@
 package me.devstar.common.service;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 
 /**
@@ -8,35 +10,42 @@ import org.springframework.data.domain.Page;
  * </pre>
  */
 public interface BaseCrudService<T, F, ID> {
-
+	
 	/**
 	 * 개체를 생성한다.
 	 * @param t
 	 * @return
 	 */
 	public T create(T t);
-
+	
 	/**
 	 * 개체를 가져온다.
 	 * @param id
 	 * @return
 	 */
 	public T get(final ID id);
-
+	
 	/**
-	 * 목록을 가져온다.
+	 * 목록을 페이징하여 가져온다.
 	 * @param searchForm
 	 * @return
 	 */
 	public Page<T> getList(final F searchForm);
-
+	
+	/**
+	 * 목록을 모두 가져온다.
+	 * @param searchForm
+	 * @return
+	 */
+	public List<T> getListAll(final F searchForm);
+	
 	/**
 	 * 개체를 수정한다.
 	 * @param t
 	 * @return
 	 */
 	public T modify(T t);
-
+	
 	/**
 	 * 개체를 수정한다.
 	 * @param t
@@ -44,7 +53,7 @@ public interface BaseCrudService<T, F, ID> {
 	 * @return
 	 */
 	public T modify(T t, final String currentUserId);
-
+	
 	/**
 	 * <pre>
 	 * 개체를 논리적으로 삭제한다.
@@ -53,7 +62,7 @@ public interface BaseCrudService<T, F, ID> {
 	 * @param id
 	 */
 	public void remove(final ID id);
-
+	
 	/**
 	 * <pre>
 	 * 개체를 논리적으로 삭제한다.
@@ -63,7 +72,7 @@ public interface BaseCrudService<T, F, ID> {
 	 * @param currentUserId 현재 사용자 ID
 	 */
 	public void remove(final ID id, final String currentUserId);
-
+	
 	/**
 	 * <pre>
 	 * 복수의  개체를 논리적으로 삭제한다.
@@ -73,7 +82,7 @@ public interface BaseCrudService<T, F, ID> {
 	 * @see #remove(Iterable, boolean)
 	 */
 	public void remove(final Iterable<T> iter);
-
+	
 	/**
 	 * <pre>
 	 * 복수의  개체를 논리적으로 삭제한다.
@@ -84,7 +93,7 @@ public interface BaseCrudService<T, F, ID> {
 	 * @see #remove(Iterable, boolean)
 	 */
 	public void remove(final Iterable<T> iter, final String currentUserId);
-
+	
 	/**
 	 * <pre>
 	 * 개체를 물리적으로 삭제한다.
@@ -93,7 +102,7 @@ public interface BaseCrudService<T, F, ID> {
 	 * @param id
 	 */
 	public void removeByPhysical(final ID id);
-
+	
 	/**
 	 * <pre>
 	 * 개체를 물리적으로 삭제한다.
@@ -103,7 +112,7 @@ public interface BaseCrudService<T, F, ID> {
 	 * @param currentUserId 현재 사용자 ID
 	 */
 	public void removeByPhysical(final ID id, final String currentUserId);
-
+	
 	/**
 	 * <pre>
 	 * 복수의 개체를 물리적으로 삭제한다.
@@ -112,7 +121,7 @@ public interface BaseCrudService<T, F, ID> {
 	 * @param iter
 	 */
 	public void removeByPhysical(final Iterable<T> iter);
-
+	
 	/**
 	 * <pre>
 	 * 복수의 개체를 물리적으로 삭제한다.

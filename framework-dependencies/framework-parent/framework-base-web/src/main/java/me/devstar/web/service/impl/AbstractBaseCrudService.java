@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.criteria.Predicate;
@@ -26,17 +27,17 @@ import me.devstar.common.service.BaseCrudService;
 @Transactional(readOnly = true)
 public abstract class AbstractBaseCrudService<T extends AbstractBaseModel<ID>, F extends SearchForm, R extends BaseCrudRepository<T, ID>, ID extends Serializable>
 		implements BaseCrudService<T, F, ID> {
-
+	
 	private static final Logger log = LoggerFactory.getLogger(AbstractBaseCrudService.class);
-
+	
 	protected R repository;
-
+	
 	@Override
 	@Transactional
 	public T create(T t) {
 		return repository.saveAndFlush(t);
 	}
-
+	
 	/**
 	 * 검색 조건을 생성한다.
 	 * @param searchForm
@@ -58,30 +59,35 @@ public abstract class AbstractBaseCrudService<T extends AbstractBaseModel<ID>, F
 		});
 		return spec;
 	}
-
+	
 	@Override
 	public T get(final ID id) {
-		return repository.getOne(id);
+		return repository.findById(id).orElse(null);
 	}
-
+	
 	@Override
 	public Page<T> getList(final F searchForm) {
 		return repository.findAll(generateSpecification(searchForm), searchForm.getPageable());
 	}
-
+	
+	@Override
+	public List<T> getListAll(final F searchForm) {
+		return repository.findAll(generateSpecification(searchForm));
+	}
+	
 	/**
 	 * @return the repository
 	 */
 	public R getRepository() {
 		return repository;
 	}
-
+	
 	@Override
 	@Transactional
 	public T modify(T t) {
 		return repository.saveAndFlush(t);
 	}
-
+	
 	@Override
 	@Transactional
 	public T modify(T t, final String currentUserId) {
@@ -89,12 +95,11 @@ public abstract class AbstractBaseCrudService<T extends AbstractBaseModel<ID>, F
 		if (tmp.getCreatedBy().equals(currentUserId)) {
 			return repository.saveAndFlush(t);
 		} else {
-			log.warn("modify authorized exception - target : [{}], current user : [{}]", tmp.getId().toString(),
-					currentUserId);
+			log.warn("modify authorized exception - target : [{}], current user : [{}]", tmp.getId().toString(), currentUserId);
 			throw new RuntimeException("You are not authorized.");
 		}
 	}
-
+	
 	@Override
 	@Transactional
 	public void remove(final ID id) {
@@ -102,7 +107,7 @@ public abstract class AbstractBaseCrudService<T extends AbstractBaseModel<ID>, F
 		t.setDeleted(true);
 		modify(t);
 	}
-
+	
 	@Override
 	@Transactional
 	public void remove(final ID id, final String currentUserId) {
@@ -115,7 +120,7 @@ public abstract class AbstractBaseCrudService<T extends AbstractBaseModel<ID>, F
 			throw new RuntimeException("You are not authorized.");
 		}
 	}
-
+	
 	@Override
 	@Transactional
 	public void remove(final Iterable<T> iter) {
@@ -127,7 +132,7 @@ public abstract class AbstractBaseCrudService<T extends AbstractBaseModel<ID>, F
 		repository.saveAll(entities);
 		repository.flush();
 	}
-
+	
 	@Override
 	@Transactional
 	public void remove(final Iterable<T> iter, final String currentUserId) {
@@ -135,10 +140,9 @@ public abstract class AbstractBaseCrudService<T extends AbstractBaseModel<ID>, F
 		T tmp = null;
 		for (T t : iter) {
 			tmp = get(t.getId());
-
+			
 			if (!currentUserId.equals(tmp.getCreatedBy())) {
-				log.warn("remove authorized exception - target : [{}], current user : [{}]", tmp.getId().toString(),
-						currentUserId);
+				log.warn("remove authorized exception - target : [{}], current user : [{}]", tmp.getId().toString(), currentUserId);
 				throw new RuntimeException("You are not authorized.");
 			}
 			tmp.setDeleted(true);
@@ -147,13 +151,13 @@ public abstract class AbstractBaseCrudService<T extends AbstractBaseModel<ID>, F
 		repository.saveAll(entities);
 		repository.flush();
 	}
-
+	
 	@Override
 	@Transactional
 	public void removeByPhysical(final ID id) {
 		repository.delete(repository.getOne(id));
 	}
-
+	
 	@Override
 	@Transactional
 	public void removeByPhysical(final ID id, final String currentUserId) {
@@ -165,14 +169,14 @@ public abstract class AbstractBaseCrudService<T extends AbstractBaseModel<ID>, F
 			throw new RuntimeException("You are not authorized.");
 		}
 	}
-
+	
 	@Override
 	@Transactional
 	public void removeByPhysical(final Iterable<T> iter) {
 		repository.deleteAll(iter);
 		repository.flush();
 	}
-
+	
 	@Override
 	@Transactional
 	public void removeByPhysical(final Iterable<T> iter, final String currentUserId) {
@@ -181,15 +185,14 @@ public abstract class AbstractBaseCrudService<T extends AbstractBaseModel<ID>, F
 		for (T t : iter) {
 			tmp = get(t.getId());
 			if (!currentUserId.equals(tmp.getCreatedBy())) {
-				log.warn("remove authorized exception - target : [{}], current user : [{}]", tmp.getId().toString(),
-						currentUserId);
+				log.warn("remove authorized exception - target : [{}], current user : [{}]", tmp.getId().toString(), currentUserId);
 				throw new RuntimeException("You are not authorized.");
 			}
 			entities.add(tmp);
 		}
 		removeByPhysical(entities);
 	}
-
+	
 	/**
 	 * @param repository
 	 * @throws Exception

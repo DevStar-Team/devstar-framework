@@ -12,8 +12,8 @@ import javax.persistence.MappedSuperclass;
  * </pre>
  */
 @MappedSuperclass
-public abstract class NonUidBaseModel<ID extends Serializable> extends AbstractBaseModel<ID> {
-
+public abstract class NonUidBaseModel<ID extends Serializable>extends AbstractBaseModel<ID> {
+	
 	private static final long serialVersionUID = -1441530154496849036L;
-
+	
 }

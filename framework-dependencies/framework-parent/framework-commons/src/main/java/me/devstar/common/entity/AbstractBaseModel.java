@@ -6,6 +6,8 @@ import javax.persistence.MappedSuperclass;
 
 import org.springframework.data.domain.Persistable;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import me.devstar.common.util.ToStringUtils;
 
 /**
@@ -16,6 +18,7 @@ import me.devstar.common.util.ToStringUtils;
  * </pre>
  */
 @MappedSuperclass
+@JsonIgnoreProperties({ "new" })
 public abstract class AbstractBaseModel<ID extends Serializable> extends AuditModel
 		implements Serializable, Persistable<ID> {
 
