@@ -42,7 +42,7 @@
 
 
 		<oracle-ojdbc7.version>12.1.0.2</oracle-ojdbc7.version>
-		<mysql.version>5.1.47</mysql.version>
+		<mysql.version>8.0.16</mysql.version>
 		<mariadb.version>2.3.0</mariadb.version>
 
 		<webjar.jquery.version>3.3.1</webjar.jquery.version>
